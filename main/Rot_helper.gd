@@ -15,9 +15,9 @@ func _physics_process(_delta):
 
 
 	if Input.is_action_pressed("ui_left"):
-		self.rotation_degrees.y -= rot_speed
-	elif Input.is_action_pressed("ui_right"):
 		self.rotation_degrees.y += rot_speed
+	elif Input.is_action_pressed("ui_right"):
+		self.rotation_degrees.y -= rot_speed
 	else:
 		self.rotation_degrees.y = rotation_degrees.y
 

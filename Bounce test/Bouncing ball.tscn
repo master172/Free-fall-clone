@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Bounce test/Bouncing ball.gd" type="Script" id=1]
 
 [sub_resource type="BoxShape" id=10]
 
 [sub_resource type="SphereMesh" id=8]
-
-[sub_resource type="BoxShape" id=11]
-extents = Vector3( 1.1, 1.1, 1.1 )
 
 [node name="Ball" type="KinematicBody" groups=["player"]]
 axis_lock_motion_x = true
@@ -21,10 +18,3 @@ shape = SubResource( 10 )
 
 [node name="SoftBody" type="MeshInstance" parent="."]
 mesh = SubResource( 8 )
-
-[node name="Area" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 11 )
-
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

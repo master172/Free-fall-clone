@@ -16,12 +16,14 @@ var first_pole_deleted = false
 onready var pole = preload("res://library/Pole.tscn")
 
 var num_pole_loaded = 2
+var score :int = 0
 
 var prev_lowest = 0
 
 onready var Top_pole = $MeshInstance
 onready var players_follower = $Follower
 onready var Player = $Player
+onready var score_label = get_node("%Score_Label")
 
 signal swiped(direction)
 signal swipe_cancelled(start_position)
@@ -75,9 +77,16 @@ func _on_Player_spawn():
 		first_pole_deleted = true
 
 func _physics_process(delta):
+	score_label.text = String(score)
 	if prev_lowest > Player.lowest:
 		prev_lowest = Player.lowest
 		players_follower.translation.y = Player.lowest + 5
 
 	if is_instance_valid(Top_pole):
 		Top_pole.rotation_degrees.y = $Pole.rotation_degrees.y
+
+
+func _on_Area_body_entered(body:Node):
+	if body.is_in_group("Obstacle"):
+		body.queue_free()
+		score += 1
